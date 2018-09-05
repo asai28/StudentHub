@@ -1,23 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 // import Home from "./Pages/Home";
 // import Internships from "./Pages/Internships";
-import RateMyProfessor from "./Pages/RateMyProfessor/RateMyProfessor";
-// import Widgets from "./Pages/Widgets";
-import Navbar from "./Components/Navbar/index";
-import Container from "./Components/Container/index";
+import RateMyProfessor from "./Pages/RateMyProfessor";
+import Widgets from "./Pages/Widgets";
 
 const App = () => {
+        return(
         <Router>
             <div>
-                {/* <Route exact path="/home" Component={Home} /> */}
-                <Route exact path="/rmp" Component={RateMyProfessor} />
-                {/* <Route exact path="/widgets" Component={Widgets} /> */}
-                {/* <Route exact path="/internships" Component={Internships} /> */}
+               {/* <RateMyProfessor/> */}
+               <Switch>
+                    {/* <Route exact path="/home" component={Home} /> */}
+                    <Route exact path="/rmp" component={RateMyProfessor} />
+                    <Route exact path="/widgets" component={Widgets} />
+                    {/* <Route exact path="/internships" component={Internships} /> */}
+                </Switch>
             </div>
         </Router>
-
-
+        );
 };
 
 export default App;

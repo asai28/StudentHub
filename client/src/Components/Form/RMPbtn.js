@@ -5,9 +5,8 @@ export const RMPbtn = props => {
   switch (props.type) {
     case 'success':
       classes += 'btn-success'
-
+    break;
     default:
-      break;
     //   can potentially add other button cases
 
 

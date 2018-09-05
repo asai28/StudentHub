@@ -5,7 +5,7 @@ import { H1, H3, H4 } from '../../Components/RMPheadings';
 import { Container, Row, Col } from "../../Components/RMPgrid";
 import { Panel, PanelHeading, PanelBody } from '../../Components/RMPpanel';
 
-export default class RMPforms extends Component {
+class RateMyProfessor extends Component {
     state = {
       firstName: '',//professor's first name
       lastName: ''//professor's lastname
@@ -23,12 +23,12 @@ export default class RMPforms extends Component {
       event.preventDefault();
       let { firstName, lastName } = this.state;
       let query = { firstName, lastName }
-      this.onSubmit(query)
+      this.formSubmit(query)
   
     };
   
     //function that opens new tab with search for professor
-    onSubmit() { 
+    formSubmit() { 
   
         let queryUrl =`http://www.ratemyprofessors.com/search.jsp?query=${this.state.firstName}+${this.state.lastName}`
   
@@ -96,3 +96,5 @@ export default class RMPforms extends Component {
       );
     }
   }
+
+export default RateMyProfessor;

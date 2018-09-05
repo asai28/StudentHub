@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@syncfusion/ej2-react-schedule": "^16.2.50",
     "axios": "^0.18.0",
     "react": "^16.4.2",
     "react-router-dom": "^4.3.1",
