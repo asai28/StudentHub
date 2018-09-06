@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { RMPform, Input, RMPbtn, FormGroup, Label } from "../../Components/Form";
-import Jumbotron from "../../Components/RMPjumbotron";
+// import Jumbotron from "../../Components/RMPjumbotron";
+import {Jumbotron} from 'reactstrap';
 import { H1, H3, H4 } from '../../Components/RMPheadings';
-import { Container, Row, Col } from "../../Components/RMPgrid";
+import { Container, Row, Col } from 'reactstrap';
 import { Panel, PanelHeading, PanelBody } from '../../Components/RMPpanel';
 
 class RateMyProfessor extends Component {
@@ -45,7 +46,7 @@ class RateMyProfessor extends Component {
           <Row>
             <Col size="sm-10" offset='sm-1'>
               <Jumbotron>
-                <H1 className='page-header text-center'>Rate My Professor Professor Search</H1>
+                <H1 className='page-header text-center'>Rate My Professor Search</H1>
                 <H4 className='text-center'>Search for your professor by first and last name</H4>
               </Jumbotron>
               <Panel>
