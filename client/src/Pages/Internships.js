@@ -1,5 +1,6 @@
 import React from 'react';
-import { Jumbotron, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Jumbotron, Button, Form, FormGroup, Label, Input, Table, Container } from 'reactstrap';
+import API from "../utils/API.js";
 var cities = require("../utils/cities.json");
 
 function getCountry(){
@@ -23,7 +24,6 @@ function getCities(country){
     }
 }
 
-
 export default class Example extends React.Component {
     constructor(props){
         super(props);
@@ -31,10 +31,12 @@ export default class Example extends React.Component {
             job: "",
             jobType: "",
             country: "",
-            city: ""
+            city: "",
+            searchResults: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.getJobs = this.getJobs.bind(this);
     }
 
     handleInputChange = e => {
@@ -46,12 +48,31 @@ export default class Example extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        this.getJobs();
         console.log(this.state);
     }
 
+    getJobs = () => {
+        //job, type, country, city
+        API.getJobsAuthenticJobs()
+        .then(res => {this.setState({ searchResults: res.data.listings.listing})})
+        .catch(err => console.log(err));
+    }
+
+    getRows = () => {
+        console.log(this.state.searchResults);
+       return this.state.searchResults.map(item => 
+            <tr id={item.id}>
+                <td>{item.id}</td>
+                <td>{item.title}</td>
+                <td><a href={item.apply_url} target="_blank">{item.apply_url}</a></td>
+            </tr>
+            )
+    }
 
   render() {
     return (
+        <div>
     <Jumbotron>
       <Form inline>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -80,6 +101,24 @@ export default class Example extends React.Component {
         <Button className="mb-2 mr-sm-2 mb-sm-0 mt-sm-2" onClick={this.handleSubmit}>Submit</Button>
       </Form>
       </Jumbotron>
+      <br/>
+      <Container>
+      <Table>
+        <thead>
+          <tr>
+            <th>Job ID</th>
+            <th>Title</th>
+            <th>Application Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {(this.state.searchResults) ? 
+              this.getRows() : "No results"
+          }
+        </tbody>
+      </Table>
+      </Container>
+      </div>
     );
   }
 }

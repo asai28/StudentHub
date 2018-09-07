@@ -1,7 +1,5 @@
 import React from "react";
-import Navbar from "../Components/Navbar/index";
 import Container from "../Components/Container/index";
-import {Image} from "react-bootstrap";
 
 const Home = () => {
     return (
