@@ -1,2 +1,25 @@
+<<<<<<< HEAD
 node_modules
 client/node_modules
+=======
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/client/node_modules
+# testing
+/coverage
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+>>>>>>> 541d1978802d0cb1c9db1314307695781de594e7
