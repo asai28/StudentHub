@@ -1,58 +1,58 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import "@progress/kendo-theme-default/dist/all.css";
 
 // components
-import LoginForm from "./Pages/Login/loginForm";
+// import LoginForm from "./Pages/Login/loginForm";
 import SignupForm from "./Pages/signUpForm";
 import Home from "./Pages/Home";
 import Internships from "./Pages/Internships";
 import RateMyProfessor from "./Pages/RateMyProfessor/RateMyProfessor";
 import SchedulerContainer from "./Pages/SchedulerContainer/SchedulerContainer";
 
-const DisplayLinks = props => {
-  if (props.loggedIn) {
-    return (
-      <nav className="navbar">
-        <ul className="nav">
-          <li className="nav-item">
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="nav-link" onClick={props._logout}>
-              Logout
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    );
-  } else {
-    return (
-      <nav className="navbar">
-        <ul className="nav">
-          <li className="nav-item">
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/login" className="nav-link">
-              login
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/signup" className="nav-link">
-              sign up
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    );
-  }
-};
+// const DisplayLinks = props => {
+//   if (props.loggedIn) {
+//     return (
+//       <nav className="navbar">
+//         <ul className="nav">
+//           <li className="nav-item">
+//             <Link to="/" className="nav-link">
+//               Home
+//             </Link>
+//           </li>
+//           <li>
+//             <Link to="#" className="nav-link" onClick={props._logout}>
+//               Logout
+//             </Link>
+//           </li>
+//         </ul>
+//       </nav>
+//     );
+//   } else {
+//     return (
+//       <nav className="navbar">
+//         <ul className="nav">
+//           <li className="nav-item">
+//             <Link to="/" className="nav-link">
+//               Home
+//             </Link>
+//           </li>
+//           <li className="nav-item">
+//             <Link to="/login" className="nav-link">
+//               login
+//             </Link>
+//           </li>
+//           <li className="nav-item">
+//             <Link to="/signup" className="nav-link">
+//               sign up
+//             </Link>
+//           </li>
+//         </ul>
+//       </nav>
+//     );
+//   }
+// };
 
 class App extends Component {
   constructor() {
@@ -120,6 +120,7 @@ class App extends Component {
             {/* <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
             {/*  ROUTES */}
 
+            <Route exact path="/" component={Home} />
             {/* <Route exact path="/" render={() => <Home user={this.state.user} />} />
                     <Route
                           exact
