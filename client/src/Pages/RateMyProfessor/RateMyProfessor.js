@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { RMPform, RMPbtn  } from "../../Components/Form";
 import {Jumbotron, Input, FormGroup, Label} from 'reactstrap';
-import { H1, H3, H4 } from '../../Components/RMPheadings';
+import { H1, H3, H4 } from '../../Components/Form/RMPheadings';
 import { Container, Row, Col } from 'reactstrap';
-import { Panel, PanelHeading, PanelBody } from '../../Components/RMPpanel';
+import { Panel, PanelHeading, PanelBody } from '../../Components/Form/RMPpanel';
 
 class RateMyProfessor extends Component {
     state = {

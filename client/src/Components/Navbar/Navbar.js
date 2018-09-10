@@ -2,16 +2,6 @@ import React from "react";
 import "./Navbar.css";
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
-<<<<<<< HEAD
-const Navbar = () => (
-  <nav>
-  <h1 className="text-center">#StudentHub
-  <span className="float-right">
-    <button className="btn btn-danger">Login</button>
-  </span></h1>
-  </nav>
-);
-=======
 const Navbar = props => {
   let Greeting;
   if (props.user === null) {
@@ -41,6 +31,5 @@ const Navbar = props => {
     </nav>
   );
 };
->>>>>>> 164448a773961499bb8f27db9f3840823d734ea2
 
 export default Navbar;
