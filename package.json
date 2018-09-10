@@ -6,15 +6,12 @@
     "dotenv": "^6.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-scripts": "1.1.5",
-    "@syncfusion/ej2": "*"
+    "react-scripts": "1.1.5"
   },
   "scripts": {
-    "start": "npm run client",
-    "client": "node scripts/start-client.js",
-    "build": "node scripts/build.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "installDeps": "yarn && cd client && yarn"
+    "eject": "react-scripts eject"
   }
 }
