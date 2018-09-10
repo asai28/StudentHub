@@ -4,20 +4,19 @@ const db = require("../db");
 const User = require("../db/models/user.js")
 const passport = require("../passport");
 
-router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
+// router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 
-router.get(
-  "/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "/",
-    failureRedirect: "/login"
-  })
-);
+// router.get(
+//   "/google/callback",
+//   passport.authenticate("google", {
+//     successRedirect: "/",
+//     failureRedirect: "/login"
+//   })
+// );
 
 // this route is used to get the user info
 router.get("/user", (req, res, next) => {
   console.log("===== user!!======");
-  console.log(req.user);
   if (req.user) {
     return res.json({ user: req.user });
   } else {
@@ -27,11 +26,6 @@ router.get("/user", (req, res, next) => {
 
 router.post(
   "/login",
-  function(req, res, next) {
-    console.log(req.body);
-    console.log("================");
-    next();
-  },
   passport.authenticate("local"),
   (req, res) => {
     console.log("POST to /login");
@@ -55,23 +49,30 @@ router.post("/logout", (req, res) => {
   }
 });
 
-router.post("/signup", (req, res) => {
+router.use("/signup", (req, res) => {
   const { username, password } = req.body;
+  console.log(password);
   // ADD VALIDATION
-  User.find({ "local.username": username }, (err, userMatch) => {
-    if (userMatch) {
+  User.find({ "username": username }, (err, userMatch) => {
+    if (userMatch.length > 0) {
       return res.json({
         error: `Sorry, already a user with the username: ${username}`
       });
     }
-    const newUser = new User({
-      "local.username": username,
-      "local.password": password
-    });
-    newUser.save((err, savedUser) => {
-      if (err) return res.json(err);
-      return res.json(savedUser);
-    });
+    else {
+      console.log("Making new user", username)
+      const newUser = new User({
+        username,
+        password
+      });
+      newUser.save((err, savedUser) => {
+        console.log("HEYOOOO", err, savedUser)
+        if (err) return res.json(err);
+        console.log("saved user", savedUser)
+        console.log("Im' being saved")
+        return res.json(savedUser);
+      });
+    }
   });
 });
 
