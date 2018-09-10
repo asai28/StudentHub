@@ -14,12 +14,12 @@ var databaseUrl = "savedJobs";
 var collections = ["save"];
 
 // Use mongojs to hook the database to the db variable
-// var db = mongojs(databaseUrl, collections);
+var db = mongojs(databaseUrl, collections);
 
 // This makes sure that any errors are logged if mongodb runs into an issue
-// db.on("error", function(error) {
-//   console.log("Database Error:", error);
-// });
+db.on("error", function(error) {
+  console.log("Database Error:", error);
+});
 
 // Routes
 // 1. At the root path, send a simple hello world message to the browser
