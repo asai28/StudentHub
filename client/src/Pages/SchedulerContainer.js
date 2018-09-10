@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Scheduler } from '@progress/kendo-scheduler-react-wrapper';
 import {kendo} from '@progress/kendo-ui';
-// import Jumbotron from "../Components/RMPjumbotron";
 import {Jumbotron} from 'reactstrap';
 
 class SchedulerContainer extends Component {

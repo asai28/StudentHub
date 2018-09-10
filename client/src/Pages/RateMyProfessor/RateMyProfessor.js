@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import { RMPform, Input, RMPbtn, FormGroup, Label } from "../../Components/Form";
-// import Jumbotron from "../../Components/RMPjumbotron";
-import {Jumbotron} from 'reactstrap';
+import { RMPform, RMPbtn } from "../../Components/Form";
+import { Jumbotron, Label, FormGroup, Input, Container, Row, Col} from 'reactstrap';
 import { H1, H3, H4 } from '../../Components/RMPheadings';
-import { Container, Row, Col } from 'reactstrap';
 import { Panel, PanelHeading, PanelBody } from '../../Components/RMPpanel';
 
 class RateMyProfessor extends Component {
     state = {
-      firstName: '',//professor's first name
-      lastName: ''//professor's lastname
+      firstName: '',    //professor's first name
+      lastName: '',     //professor's lastname
+      university: '',
 
+      
     };
   
     //capturing state of inputs on change
@@ -22,8 +22,9 @@ class RateMyProfessor extends Component {
     //generating the query for the search from store state
     handleFormSubmit = event => {
       event.preventDefault();
-      let { firstName, lastName } = this.state;
-      let query = { firstName, lastName }
+      let { firstName, lastName , university} = this.state;
+      university = university.split(" ").join("+");
+      let query = { firstName, lastName , university};
       this.formSubmit(query)
   
     };
@@ -31,10 +32,11 @@ class RateMyProfessor extends Component {
     //function that opens new tab with search for professor
     formSubmit() { 
   
-        let queryUrl =`http://www.ratemyprofessors.com/search.jsp?query=${this.state.firstName}+${this.state.lastName}`
+        let queryUrl =`http://www.ratemyprofessors.com/search.jsp?queryoption=HEADER&queryBy=teacherName&schoolName=${this.state.university}&schoolID=45&query=${this.state.firstName}+${this.state.lastName}`;
+
+        // `http://www.ratemyprofessors.com/search.jsp?query=${this.state.firstName}+${this.state.lastName}`
   
-      
-    //   open a new tab of the search results
+        //   open a new tab of the search results
 
         window.open(queryUrl, "_blank")
 
@@ -73,15 +75,15 @@ class RateMyProfessor extends Component {
                         placeholder='Last Name'
                       />
                     </FormGroup>
-                    {/* <FormGroup >
+                    <FormGroup >
                       <Label htmlFor="university">Enter your University</Label>
                       <Input
                         onChange={this.handleInputChange}
-                        name='universtiy'
+                        name='university'
                         value={this.state.university}
                         placeholder='University'
                       />
-                    </FormGroup> */}
+                    </FormGroup>
                     <RMPbtn
                       disabled={!(this.state.firstName && this.state.lastName)}
                       onClick={this.handleFormSubmit}
