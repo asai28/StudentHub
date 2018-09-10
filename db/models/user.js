@@ -27,10 +27,6 @@ userSchema.methods = {
   }
 };
 
-// userSchema.methods.checkPassword = function(inputPassword) {
-//   return bcrypt.compareSync(inputPassword, this.password);
-// }
-
 // Define hooks for pre-saving
 userSchema.pre("save", function(next) {
   if (!this.password) {
@@ -38,7 +34,6 @@ userSchema.pre("save", function(next) {
     next();
   } else {
     console.log("models/user.js hashPassword in pre save");
-
     this.password = this.hashPassword(this.password);
     next();
   }

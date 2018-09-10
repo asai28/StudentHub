@@ -17,7 +17,7 @@ const Container = () => {
         </div>
         <div className="col-lg-4">
           <a
-            href="/scheduler"
+            href="/schedule"
             title="Question Papers, Scheduler and more!"
             alt="Question Papers, Scheduler and more!"
           >
