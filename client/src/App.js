@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./Pages/Home";
 import Internships from "./Pages/Internships";
 import Navbar from "./Components/Navbar/index";
-import RateMyProfessor from "./Pages/RateMyProfessor";
-import SchedulerContainer from "./Pages/SchedulerContainer";
-import '@progress/kendo-theme-default/dist/all.css';
+// import RateMyProfessor from "./Pages/RateMyProfessor";
+// import Widgets from "./Pages/Widgets";
+import NoMatch from "./Pages/NoMatch";
 
 const App = () => {
-        return(
+    return (
         <Router>
             <div>
                <Navbar />
@@ -25,3 +25,4 @@ const App = () => {
 };
 
 export default App;
+    
