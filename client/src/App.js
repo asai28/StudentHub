@@ -68,7 +68,7 @@ class App extends Component {
   }
   componentDidMount() {
     axios.get("/auth/user").then(response => {
-      console.log(response.data);
+      console.log("BBBBBBBB" + JSON.stringify(response.data));
       if (!!response.data.user) {
         console.log("There is a user! YAY!");
         this.setState({
@@ -130,9 +130,9 @@ class App extends Component {
           )}
         />
         <Route exact path="/signup" component={SignupForm} />
-        <Route exact path="/rmp" component={RateMyProfessor} />
+        {/* <Route exact path="/rmp" component={RateMyProfessor} /> */}
         {/* <Route exact path="/widgets" component={Widgets} /> */}
-        <Route exact path="/internships" component={Internships} />
+        {/* <Route exact path="/internships" component={Internships} /> */}
         {/* <LoginForm _login={this._login} /> */}
       </div>
     );

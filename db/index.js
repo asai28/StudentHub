@@ -1,6 +1,6 @@
 //Connection to Mongo database
 const mongoose = require("mongoose");
-const User = require("./models/user");
+require("./models/user");
 mongoose.Promise = global.Promise;
 let MONGO_URL;
 const MONGO_LOCAL_URL = "mongodb://localhost:27017/testUsers";
