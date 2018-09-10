@@ -1,6 +1,7 @@
 import React from 'react';
 import { Jumbotron, Button, Form, FormGroup, Label, Input, Table, Container } from 'reactstrap';
 import API from "../utils/API.js";
+import Moment from 'react-moment';
 var cities = require("../utils/cities.json");
 
 function getCountry(){
@@ -29,14 +30,21 @@ export default class Example extends React.Component {
         super(props);
         this.state = {
             job: "",
+            categories: [],
             jobType: "",
             country: "",
             city: "",
-            searchResults: []
+            searchResults: [],
+            source: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.getJobs = this.getJobs.bind(this);
+        this.getJobCategories = this.getJobCategories.bind(this);
+    }
+
+    componentDidMount = () => {
+        this.getJobCategories();
     }
 
     handleInputChange = e => {
@@ -49,23 +57,46 @@ export default class Example extends React.Component {
     handleSubmit = e => {
         e.preventDefault();
         this.getJobs();
-        console.log(this.state);
+        API.getAdzunaJobs()
+        .then(res => console.log(res.data.results))
+        .catch(err => console.log(err));
     }
 
     getJobs = () => {
         //job, type, country, city
         API.getJobsAuthenticJobs()
-        .then(res => {this.setState({ searchResults: res.data.listings.listing})})
+        .then(res => {
+            this.setState({ searchResults: res.data.listings.listing});
+        })
         .catch(err => console.log(err));
     }
 
+    getJobCategories = () => {
+        API.getJobCategories()
+        .then(res => {
+            this.setState({
+                categories: res.data.categories.category
+            });
+        } 
+        )
+        .catch(err => console.log(err));
+        return <option>...</option>;
+    }
+
+    save = () => {
+        API.saveArticle()
+        .then(res => console(res))
+        .catch(err => console.log(err));  
+    }
+
     getRows = () => {
-        console.log(this.state.searchResults);
-       return this.state.searchResults.map(item => 
-            <tr id={item.id}>
-                <td>{item.id}</td>
+       return this.state.searchResults.map((item, index ) => 
+            <tr id={index}>
+                <td>{index + 1}</td>
                 <td>{item.title}</td>
                 <td><a href={item.apply_url} target="_blank">{item.apply_url}</a></td>
+                <td><Moment format="YYYY/MM/DD" date={item.post_date} /></td>
+                <td><Button className="btn btn-danger" onClick={this.save}>Save this</Button></td>
             </tr>
             )
     }
@@ -77,7 +108,9 @@ export default class Example extends React.Component {
       <Form inline>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label for="jobField" className="mr-sm-2">Job field</Label>
-          <Input type="text" name="job" id="jobField" value={this.state.job} placeholder="Example: Web developer" onChange={this.handleInputChange} />
+          <Input type="select" name="job" id="jobField" value={this.state.job} source={this.state.source} placeholder="Example: Web developer" onChange={this.handleInputChange}>
+          {(this.state.categories)? this.state.categories.map(category => <option id={category.id} source={"Authentic API"}>{category.name}</option>) : <option>...</option>}
+          </Input>
         </FormGroup>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label for="jobType" className="mr-sm-2">Job Type</Label>
@@ -93,7 +126,7 @@ export default class Example extends React.Component {
           </Input>
         </FormGroup>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0  mt-sm-2">
-          <Label for="cities" className="mr-sm-2">City Preferred</Label>
+          <Label for="cities" className="mr-sm-2">City Preferred (Optional)</Label>
           <Input type="select" name="city" id="city" value={this.state.city}  onChange={this.handleInputChange}>
           {getCities(this.state.country)}
           </Input>
@@ -109,6 +142,8 @@ export default class Example extends React.Component {
             <th>Job ID</th>
             <th>Title</th>
             <th>Application Link</th>
+            <th>Post Date</th>
+            <th>Save Job</th>
           </tr>
         </thead>
         <tbody>

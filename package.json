@@ -6,12 +6,16 @@
     "dotenv": "^6.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-scripts": "1.1.5"
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5",
+    "reactstrap": "^6.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run client && node server",
+    "client": "node scripts/start-client.js",
+    "build": "node scripts/build.js",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "installDeps": "yarn && cd client && yarn"
   }
 }
