@@ -1,7 +1,7 @@
 // import React from "react";
 import axios from "axios";
 
-var keys = require("../keys");
+// var keys = require("../keys");
 
 export default {
   //job, type, country, city category, type, location, keywords
@@ -9,7 +9,7 @@ export default {
     // if(!job && !country && !city && !type){
     return axios.get(
       "https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=" +
-        keys.default.apikey +
+        "fd79f0c01d6945b2fde8f095428800e9" +
         "&method=aj.jobs.search&format=json"
     );
     // }
@@ -17,7 +17,7 @@ export default {
   getJobCategories: () => {
     return axios.get(
       "https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=" +
-        keys.default.apikey +
+        "fd79f0c01d6945b2fde8f095428800e9" +
         "&method=aj.categories.getList&format=json"
     );
   },
@@ -37,7 +37,7 @@ export default {
     // if(!job && !country && !city && !type){
     return axios.get(
       "https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=" +
-        keys.default.apikey +
+        "fd79f0c01d6945b2fde8f095428800e9" +
         "&method=aj.jobs.search&format=json"
     );
     // }
@@ -45,7 +45,7 @@ export default {
   getJobCategories: () => {
     return axios.get(
       "https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=" +
-        keys.default.apikey +
+        "fd79f0c01d6945b2fde8f095428800e9" +
         "&method=aj.categories.getList&format=json"
     );
   },
