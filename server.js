@@ -68,7 +68,7 @@ app.use("/auth", require("./auth"));
 // build heroku react app
 app.get("*", (req, res) => {
   console.log("=================== MAIN ROUTE ====================");
-  res.sendFile(path.join(__dirname, "/client/build/index.html"));
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 
