@@ -13,8 +13,10 @@ passport.serializeUser((user, done) => {
 
 // user object attaches to the request as req.user
 passport.deserializeUser((id, done) => {
+  console.log("id", id)
   console.log("DeserializeUser called");
-  User.findOne({ _id: id }, "username", (err, user) => {
+  User.find({ _id: id }, "username", (err, user) => {
+    if (err) throw err
     console.log("*** Deserialize user, user:");
     console.log(user);
     console.log("--------------");
@@ -24,6 +26,5 @@ passport.deserializeUser((id, done) => {
 
 //  Use Strategies
 passport.use(LocalStrategy);
-passport.use(GoogleStratgey);
 
 module.exports = passport;

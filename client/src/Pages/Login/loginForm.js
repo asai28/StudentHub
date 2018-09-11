@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class loginForm extends Component {
   constructor(props) {
@@ -22,9 +22,9 @@ class loginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("I'm running")
+    console.log("I'm running");
     this.props.login(this.state.username, this.state.password);
-    console.log("after props")
+    console.log("after props");
     // this.setState({
     //   redirectTo: "/"
     // });
@@ -53,6 +53,9 @@ class loginForm extends Component {
               onChange={this.handleChange}
             />
             <button onClick={this.handleSubmit}>Login</button>
+            <Link to="/signup">
+              <button>Sign Up</button>
+            </Link>
           </form>
         </div>
       );

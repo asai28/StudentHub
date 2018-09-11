@@ -4,19 +4,14 @@ import "./Navbar.css";
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 const Navbar = props => {
-  console.log(props)
   let Greeting;
-  if (!props.user) {
-    Greeting = <p>Hello Guest!</p>;
-  } else {
+  if (props.loggedIn) {
     Greeting = (
       <p>
-        Welcome back, <strong>{props.user.firstName}</strong>
+        Welcome back, <strong>{props.user[0].username}</strong>
       </p>
     );
-  }
 
-  if (props.logged) {
     return (
       <nav>
         <h1 className="text-center">
@@ -31,6 +26,7 @@ const Navbar = props => {
       </nav>
     );
   } else {
+    Greeting = <p>Hello Guest!</p>;
     return (
       <nav>
         <h1 className="text-center">

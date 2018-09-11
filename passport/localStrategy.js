@@ -18,7 +18,7 @@ const strategy = new LocalStrategy(
         console.log("wrong pass")
         return done(null, false, { message: "Incorrect password" });
       }
-      return done(null, User);
+      return done(null, userMatch);
     });
   }
 );

@@ -26,14 +26,14 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  console.log(req)
-  // if (req.user) {
-  //   req.session.destroy();
-  //   res.clearCookie("connect.sid"); // clean up!
-  //   return res.json({ msg: "logging you out" });
-  // } else {
-  //   return res.json({ msg: "no user to log out!" });
-  // }
+  console.log(req);
+  if (req.user) {
+    req.session.destroy();
+    res.clearCookie("connect.sid"); // clean up!
+    return res.json({ msg: "logging you out" });
+  } else {
+    return res.json({ msg: "no user to log out!" });
+  }
 });
 
 router.use("/signup", (req, res) => {
