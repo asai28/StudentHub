@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const path = require("path");
 
 // loads our connection to the mongo database
 const dbConnection = require("./db");
