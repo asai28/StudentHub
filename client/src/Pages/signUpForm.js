@@ -29,7 +29,7 @@ class signUpForm extends Component {
         password: this.state.password
       })
       .then(response => {
-        console.log(response);
+        console.log(response.data);
         if (!response.data.errmsg) {
           console.log("You have signed up!");
           this.setState({

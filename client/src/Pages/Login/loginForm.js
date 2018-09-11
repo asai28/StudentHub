@@ -1,35 +1,33 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-//google button images linked here
-// import googleButton from "./google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png";
-
 class loginForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       password: "",
       redirectTo: null
     };
 
-    // this.googleSignin = this.googleSignin.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
+  //capturing state of inputs on change
+  handleChange = event => {
+    let { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props._login(this.state.username, this.state.password);
-    this.setState({
-      redirectTo: "/"
-    });
+    console.log("I'm running")
+    this.props.login(this.state.username, this.state.password);
+    console.log("after props")
+    // this.setState({
+    //   redirectTo: "/"
+    // });
   }
 
   render() {
@@ -56,10 +54,6 @@ class loginForm extends Component {
             />
             <button onClick={this.handleSubmit}>Login</button>
           </form>
-          {/* <a href="/auth/google">
-            <GoogleButton />
-            <img src={googleButton} alt="sign into Google Button" />
-          </a> */}
         </div>
       );
     }
