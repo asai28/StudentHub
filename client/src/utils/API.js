@@ -1,17 +1,17 @@
 import React from "react";
 import axios from "axios";
 
-var keys = require("../keys");
+// var keys = require("../keys");
 
 export default {
     //job, type, country, city category, type, location, keywords
     getJobsAuthenticJobs : () => {
         // if(!job && !country && !city && !type){
-            return axios.get("https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=" + keys.default.apikey + "&method=aj.jobs.search&format=json")
+            return axios.get("https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=" + "fd79f0c01d6945b2fde8f095428800e9" + "&method=aj.jobs.search&format=json")
             // }
         },
     getJobCategories: () => {
-        return axios.get("https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key="+ keys.default.apikey + "&method=aj.categories.getList&format=json")
+        return axios.get("https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key="+ "fd79f0c01d6945b2fde8f095428800e9" + "&method=aj.categories.getList&format=json")
     },
 
     getAdzunaJobs: () => {
