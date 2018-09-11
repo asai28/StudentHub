@@ -1,5 +1,3 @@
-import React from 'react';
+import React from "react";
 
-export const RMPform = props => (
-  <form {...props}>{props.children}</form>
-)
+export const RMPform = props => <form {...props}>{props.children}</form>;

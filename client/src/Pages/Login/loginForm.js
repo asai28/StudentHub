@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
 //google button images linked here
-import googleButton from "./google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png";
+// import googleButton from "./google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png";
 
 class loginForm extends Component {
   constructor() {
@@ -26,10 +26,9 @@ class loginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("handleSubmit");
     this.props._login(this.state.username, this.state.password);
     this.setState({
-      redirectTo: "/intern"
+      redirectTo: "/"
     });
   }
 
@@ -57,10 +56,10 @@ class loginForm extends Component {
             />
             <button onClick={this.handleSubmit}>Login</button>
           </form>
-          <a href="/auth/google">
-            {/* <GoogleButton /> */}
+          {/* <a href="/auth/google">
+            <GoogleButton />
             <img src={googleButton} alt="sign into Google Button" />
-          </a>
+          </a> */}
         </div>
       );
     }
