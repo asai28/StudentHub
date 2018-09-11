@@ -1,6 +1,0 @@
-{
-    "root": "student-hub/",
-    "routes": {
-        "/**": "index.html"
-    }
-}
