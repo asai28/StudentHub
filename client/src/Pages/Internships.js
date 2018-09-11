@@ -45,6 +45,18 @@ export default class Example extends React.Component {
 
     componentDidMount = () => {
         this.getJobCategories();
+        let adzunaCategories = [];
+        API.getAdzunaJobCategories()
+        .then(res => {
+            res.data.results.forEach((elem) => {
+                adzunaCategories.push(elem.label);
+            });
+            this.setState({
+                categories: this.state.categories.concat(adzunaCategories)
+            })
+        }
+        )
+        .catch(err => console.log(err));
     }
 
     handleInputChange = e => {
@@ -54,33 +66,52 @@ export default class Example extends React.Component {
         });
     }
 
+    clearResults = () => {
+        this.setState({
+            searchResults: []
+        });
+    }
+
     handleSubmit = e => {
         e.preventDefault();
+        this.clearResults()
         this.getJobs();
-        API.getAdzunaJobs()
+        API.getAdzunaJobs(this.state.job, this.state.country, this.state.city)
         .then(res => console.log(res.data.results))
         .catch(err => console.log(err));
     }
 
     getJobs = () => {
         //job, type, country, city
-        API.getJobsAuthenticJobs()
-        .then(res => {
-            this.setState({ searchResults: res.data.listings.listing});
-        })
-        .catch(err => console.log(err));
+        if(this.state.job === "IT Jobs"){
+            API.getJobsAuthenticJobs()
+            .then(res => {
+                this.setState({ searchResults: this.state.searchResults.concat(res.data.listings.listing)});
+            })
+            .catch(err => console.log(err));
+        }
+        API.getAdzunaJobs(this.state.job, this.state.country, this.state.city)
+        .then(res => 
+        this.setState({
+            searchResults: this.state.searchResults.concat(res.data.results)
+        }
+        ));
+        console.log(this.state.searchResults);
     }
 
     getJobCategories = () => {
+        let authenticCategories = [];
         API.getJobCategories()
         .then(res => {
+            res.data.categories.category.forEach((elem) => {
+                authenticCategories.push(elem.name);
+            })
             this.setState({
-                categories: res.data.categories.category
+                categories: this.state.categories.concat(authenticCategories)
             });
         } 
         )
         .catch(err => console.log(err));
-        return <option>...</option>;
     }
 
     save = () => {
@@ -93,9 +124,9 @@ export default class Example extends React.Component {
        return this.state.searchResults.map((item, index ) => 
             <tr id={index}>
                 <td>{index + 1}</td>
-                <td>{item.title}</td>
-                <td><a href={item.apply_url} target="_blank">{item.apply_url}</a></td>
-                <td><Moment format="YYYY/MM/DD" date={item.post_date} /></td>
+                <td>{(item.title) ? item.title.replace(/<strong>|<\/strong>/gi, "") : item.category.label }</td>
+                <td><a href={(item.apply_url)? item.apply_url : item.redirect_url} target="_blank">{(item.apply_url)? item.apply_url : item.redirect_url}</a></td>
+                <td><Moment format="YYYY/MM/DD" date={(item.post_date)? item.post_date : item.company.created} /></td>
                 <td><Button className="btn btn-danger" onClick={this.save}>Save this</Button></td>
             </tr>
             )
@@ -109,7 +140,7 @@ export default class Example extends React.Component {
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label for="jobField" className="mr-sm-2">Job field</Label>
           <Input type="select" name="job" id="jobField" value={this.state.job} source={this.state.source} placeholder="Example: Web developer" onChange={this.handleInputChange}>
-          {(this.state.categories)? this.state.categories.map(category => <option id={category.id} source={"Authentic API"}>{category.name}</option>) : <option>...</option>}
+          {(this.state.categories)? this.state.categories.map((category, index) => <option id={index}>{category}</option>) : <option>...</option>}
           </Input>
         </FormGroup>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -135,8 +166,8 @@ export default class Example extends React.Component {
       </Form>
       </Jumbotron>
       <br/>
-      <Container>
-      <Table>
+      {/* <Container> */}
+      <Table className="ml-2 mr-2">
         <thead>
           <tr>
             <th>Job ID</th>
@@ -152,7 +183,7 @@ export default class Example extends React.Component {
           }
         </tbody>
       </Table>
-      </Container>
+      {/* </Container> */}
       </div>
     );
   }

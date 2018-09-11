@@ -5,6 +5,7 @@ import "@progress/kendo-theme-default/dist/all.css";
 
 // components
 import LoginForm from "./Pages/Login/loginForm";
+import Header from "./Components/Navbar";
 import SignupForm from "./Pages/signUpForm";
 import Home from "./Pages/Home";
 import Internships from "./Pages/Internships";
