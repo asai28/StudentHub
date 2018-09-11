@@ -50,19 +50,19 @@ if (process.env.NODE_ENV === "production") {
 app.use("/auth", require("./auth"));
 
 // ====== Error handler ====
-app.use(function(err, req, res, next) {
-  console.log("====== ERROR =======");
-  console.error(err.stack);
-  res.status(500);
-});
+// app.use(function(err, req, res, next) {
+//   console.log("====== ERROR =======");
+//   console.error(err.stack);
+//   res.status(500);
+// });
 
 // ==== Starting the API Server =====
 
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+// // Serve up static assets (usually on heroku)
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+// }
 
 // build heroku react app
 app.get("*", (req, res) => {
