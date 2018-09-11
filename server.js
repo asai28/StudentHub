@@ -57,9 +57,6 @@ app.use(function(err, req, res, next) {
 });
 
 // ==== Starting the API Server =====
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
 
 
 // Serve up static assets (usually on heroku)
@@ -72,11 +69,10 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-// Set the app to listen on port 3000
-app.listen(3001, function() {
-  console.log("App running on port 3001!");
-});
 
+app.listen(PORT, function() {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
 // // const routes = require("./routes");
 // const indexRoute = require("./routes/index");
 // const user = require("./routes/users");
