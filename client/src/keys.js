@@ -1,3 +1,3 @@
 export default {
-    apikey: process.env.REACT_APP_APIKEY
-}
+  apikey: process.env.REACT_APP_APIKEY
+};
