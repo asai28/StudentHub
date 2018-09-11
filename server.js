@@ -112,3 +112,18 @@ app.listen(3001, function() {
 // app.listen(PORT, function() {
 //   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 // });
+
+
+// "scripts": {
+//   "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+//   "start:prod": "node server.js",
+//   "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+//   "client": "cd client && npm run start",
+//   "seed": "node scripts/seedDB.js",
+//   "install": "cd client && yarn install",
+//   "build": "cd client && npm run build",
+//   "heroku-postbuild": "npm run build",
+//   "test": "react-scripts test --env=jsdom",
+//   "eject": "react-scripts eject",
+//   "installDeps": "yarn && cd client && yarn"
+// },
