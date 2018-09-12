@@ -4,16 +4,6 @@ const db = require("../db");
 const User = require("../db/models/user.js");
 const passport = require("../passport");
 
-// router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
-
-// router.get(
-//   "/google/callback",
-//   passport.authenticate("google", {
-//     successRedirect: "/",
-//     failureRedirect: "/login"
-//   })
-// );
-
 // this route is used to get the user info
 router.get("/user", (req, res, next) => {
   console.log("===== user!!======");

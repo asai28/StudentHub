@@ -23,6 +23,9 @@ const PORT = process.env.PORT || 3001;
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+
+app.use(passport.initialize());
 app.use(
   session({
     secret: process.env.APP_SECRET || "this is the default passphrase",
@@ -33,39 +36,11 @@ app.use(
 );
 
 // ===== Passport ====
-app.use(passport.initialize());
-// will call the deserializeUser
-app.use(passport.session());
-
-// ==== if its production environment!
-// if (process.env.NODE_ENV === "production") {
-//   const path = require("path");
-//   console.log("YOU ARE IN THE PRODUCTION ENV");
-//   app.use("/static", express.static(path.join(__dirname, "../build/static")));
-//   app.get("/", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../build/"));
-//   });
-// }
-
 /* Express app ROUTING */
 app.use("/auth", require("./auth"));
 
-// ====== Error handler ====
-// app.use(function(err, req, res, next) {
-//   console.log("====== ERROR =======");
-//   console.error(err.stack);
-//   res.status(500);
-// });
 
-// ==== Starting the API Server =====
-
-
-// // Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// }
-
-// build heroku react app
+// checking route
 app.get("*", (req, res) => {
   console.log("=================== MAIN ROUTE ====================");
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
@@ -75,38 +50,3 @@ app.get("*", (req, res) => {
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
-// // const routes = require("./routes");
-// const indexRoute = require("./routes/index");
-// const user = require("./routes/users");
-// require("./config/passport");
-
-// const app = express();
-// const PORT = process.env.PORT || 3001;
-
-// // Define middleware here
-// app.use(morgan("dev"));
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(cookieParser());
-// app.use(bodyParser.json());
-
-// // Passport
-// app.use(passport.initialize());
-
-// // Routes
-// app.use("/", indexRouter);
-// app.use("/users", usersRouter);
-
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-
-// // Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// }
-
-// // Start the API server
-// app.listen(PORT, function() {
-//   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-// });
