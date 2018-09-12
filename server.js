@@ -46,6 +46,59 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+app.get("/", function(req, res){
+  res.send("Hi");
+});
+
+app.post("/", function(req, res){
+  res.send({});
+})
+
+app.post("/savedJobs", function(req, res){
+  console.log("req.body", req.body);
+  const {jobid, link, title, date} = req.body;
+  const newSaved = new Job({jobid, link, title, date});
+  newSaved.save((err, savedJob) => {
+    if(err){console.log(err);}
+    else{
+      console.log(savedJob);
+    }
+  })
+});
+
+app.get("/savedJobs", function(req, res){
+  Job.find({}, function(err, found){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.json(found);
+    }
+  })
+})
+
+app.get("/clear", function(req, res){
+  Job.remove({}, function(err, found){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.json(found);
+    }
+  })
+});
+
+app.get("/savedJobs/:id", function(req, res){
+  console.log("Req ID:",req.params.id);
+  Job.remove({_id: req.params.id}, function(err, found){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.json(found);
+    }
+  })
+})
 
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
